@@ -13,7 +13,7 @@ class Home extends Component {
     componentDidMount() {
         
         db.collection('posts')
-        .orderBy('createdAt', 'desc')
+        
         .onSnapshot((docs) => {
             let arrDocs = [];
             docs.forEach((doc) => {
@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
         padding: 10,
         marginVertical: 5,
         borderRadius: 5,
-        shadowColor: '#000',
-        shadowOpacity: 0.1,
+        shadowColor: 'pink',
+        shadowOpacity: 5,
         shadowRadius: 5,
         elevation: 2,
     },
