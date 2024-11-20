@@ -29,20 +29,15 @@ export default class BuscadorUsers extends Component {
         });
     }
 
-    goToAnidada(){
-        this.props.navigation.navigate('home')
-    }
- 
     filtrado(text) {
         const filtered = this.state.users.filter((user) => {
-            // Asegúrate de que user.data.username existe antes de aplicar toLowerCase()
             return user.data.username && 
                    user.data.username.toLowerCase().includes(text.toLowerCase());
         });
     
         this.setState({
-            searchText: text,       // Guarda el texto escrito
-            filteredUsers: filtered, // Muestra solo los usuarios filtrados
+            searchText: text,       // guardo el texto escrito
+            filteredUsers: filtered, // muestro solo los usuarios filtrados
         });
     }
     
@@ -64,13 +59,6 @@ export default class BuscadorUsers extends Component {
             renderItem={ ({item}) =>  <Text style={styles.userCard}> {item.data.username} </Text>} // viene destrucutrado 
         />
 
-        <TouchableOpacity
-            style={styles.volverButton}
-            onPress={()=> this.goToAnidada()}
-        >
-            <Text>Volver a home</Text>
-        </TouchableOpacity>
-
       </View>
     )
   }
@@ -78,45 +66,45 @@ export default class BuscadorUsers extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, // Ocupa toda la pantalla
-        backgroundColor: '#f9f9f9', // Fondo suave
-        padding: 20, // Espaciado general
+        flex: 1, 
+        backgroundColor: '#f9f9f9', 
+        padding: 20, 
         alignItems: 'center',
     },
     searchInput: {
-        height: 45, // Tamaño más grande para facilitar la escritura
-        width: '100%', // Ocupa todo el ancho del contenedor
+        height: 45, 
+        width: '100%', 
         borderWidth: 1,
         borderRadius: 8,
         borderColor: '#ddd',
         backgroundColor: '#fff',
-        paddingHorizontal: 15, // Espaciado interno
+        paddingHorizontal: 15, 
         marginVertical: 15,
-        fontSize: 16, // Fuente más legible
+        fontSize: 16, 
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 }, // Sombra sutil
+        shadowOffset: { width: 0, height: 2 }, 
         shadowOpacity: 0.1,
         shadowRadius: 4,
     },
     texto: {
-        fontSize: 20, // Tamaño más grande para el título
+        fontSize: 20, 
         fontWeight: 'bold',
-        color: '#333', // Color de texto oscuro
+        color: '#333', 
         marginBottom: 15,
     },
     userCard: {
-        backgroundColor: '#fff', // Fondo blanco para destacar cada usuario
-        padding: 15, // Espaciado interno
-        marginBottom: 10, // Separación entre tarjetas
-        borderRadius: 8, // Bordes redondeados
+        backgroundColor: '#fff', 
+        padding: 15, 
+        marginBottom: 10, 
+        borderRadius: 8, 
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
-        width: '100%', // Ocupa todo el ancho
+        width: '100%', 
     },
     volverText: {
-        color: '#fff', // Texto blanco
+        color: '#fff', 
         fontSize: 16,
         fontWeight: 'bold',
     },

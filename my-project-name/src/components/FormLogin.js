@@ -1,4 +1,4 @@
-import { Text, View , TextInput, StyleSheet, TouchableOpacity} from 'react-native'
+import { Text, View , TextInput, StyleSheet, TouchableOpacity, CheckBox} from 'react-native'
 import React, { Component } from 'react'
 import { auth } from '../firebase/config'
 
@@ -8,7 +8,8 @@ export default class FormularioLogin extends Component {
         this.state = {
             email: '', //mail
             password: '', // contraseña
-            error: ''
+            error: '',
+            rememberMe: false,
         }
     }
 
@@ -30,6 +31,9 @@ export default class FormularioLogin extends Component {
             this.props.navigation.navigate('anidada')
             console.log('ingreso correctamente') 
             console.log(user);
+
+            // FALTA IF PARA VER SI EL USUARIO ESTA NE SESION 
+
         })
         .catch((err) => {
             if (err.code === 'auth/internal-error') {
@@ -66,6 +70,13 @@ export default class FormularioLogin extends Component {
                     {this.state.error}
                 </Text>
             }
+            <View style={styles.rememberMeContainer}>
+                    <CheckBox
+                        value={this.state.rememberMe}
+                        onValueChange={(newValue) => this.setState({ rememberMe: newValue })}
+                    />
+                    <Text style={styles.rememberMeText}>Recordarme</Text>
+            </View>
             <TouchableOpacity 
                 style={styles.boton}
                 onPress={() => this.login(this.state.email, this.state.password)}
@@ -119,5 +130,13 @@ const styles = StyleSheet.create({
         color: 'red',
         marginVertical: 5,
         textAlign: 'center',
+    },
+    rememberMeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 10,
+    },
+    rememberMeText: {
+        marginLeft: 5,
     },
 })

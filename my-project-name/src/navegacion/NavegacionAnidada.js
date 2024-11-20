@@ -32,7 +32,7 @@ export default class NavegacionAnidada extends Component {
               tabBarIcon: () => <FontAwesome6 name="add" size={24} color="black" />}}
             
             />
-            <Tab.Screen name='buscador' component={BuscadorUsers}  options={{
+            <Tab.Screen name='search profiles' component={BuscadorUsers}  options={{
               headerShown: false,
               tabBarIcon: () => <FontAwesome name="search" size={24} color="black" /> }}/>
             

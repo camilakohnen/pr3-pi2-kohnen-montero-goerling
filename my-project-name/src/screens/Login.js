@@ -1,6 +1,7 @@
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import React, { Component } from 'react'
-import FormularioLogin from '../components/FormularioLogin'
+import FormularioLogin from '../components/FormLogin'
+
 
 export default class Login extends Component {
     constructor(props){
