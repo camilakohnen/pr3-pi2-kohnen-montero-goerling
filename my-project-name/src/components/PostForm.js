@@ -8,7 +8,7 @@ export default class CrearPosteo extends Component {
         this.state = {
             texto: '', 
             error: '',
-            verificacion: "",
+            verificacion: "", //pare verificar si el posteo esta subido y luego mandar a home
         };
     }
 
