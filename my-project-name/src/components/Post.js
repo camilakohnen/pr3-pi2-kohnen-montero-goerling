@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 import { db } from '../firebase/config';
+import Likes from './Likes';
 
 export default class Post extends Component {
     constructor(props) {
@@ -47,6 +48,7 @@ export default class Post extends Component {
                             <Text style={styles.date}>
                                 {item.data.createdAt?.toDate?.().toLocaleString() || 'Sin fecha'}
                             </Text>
+                            <Likes postId={item.id} likesCount={item.data.likesCount || 0} />
                         </View>
                     )}
                 />

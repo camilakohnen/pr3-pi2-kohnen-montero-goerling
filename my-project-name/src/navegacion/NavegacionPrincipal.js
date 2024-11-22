@@ -10,9 +10,9 @@ export default class NavegacionPrincipal extends Component {
   render() {
     return (
         <Stack.Navigator>
-            <Stack.Screen name='register' component={Register}  options={{headerShown: false}} />
-            <Stack.Screen name='login' component={Login} options={{headerShown: false}} />
-            <Stack.Screen name='anidada' component={NavegacionAnidada}  options={{headerShown: false}} />
+            <Stack.Screen name='Register' component={Register}  options={{headerShown: false}} />
+            <Stack.Screen name='Login' component={Login} options={{headerShown: false}} />
+            <Stack.Screen name='Home' component={NavegacionAnidada}  options={{headerShown: false}} />
         </Stack.Navigator>
     )
   }

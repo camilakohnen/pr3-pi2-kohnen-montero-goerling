@@ -13,7 +13,7 @@ export default class Login extends Component {
     }
 
     irARegister(){
-        this.props.navigation.navigate('register')
+        this.props.navigation.navigate('Register')
     }
 
   render() {

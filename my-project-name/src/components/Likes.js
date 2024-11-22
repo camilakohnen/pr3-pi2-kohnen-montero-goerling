@@ -3,79 +3,101 @@ import React, { Component } from 'react'
 import firebase from 'firebase'
 import { db, auth } from '../firebase/config'
 
-export default class likes extends Component {
-    constructor(props){
-        super(props)
+
+export default class Likes extends Component {
+    constructor(props) {
+        super(props);
         this.state = {
-            esCopado: false,
-        }
+            userLiked: false,
+            contador: this.props.likes || 0,
+        };
     }
 
-    actualizarEsCopado(idDocumento){
-        db
-        .collection('users')
-        .doc(idDocumento)
-        .update({
-           arrCopados: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-        })
-        .then( () => {
-            this.setState({
-                esCopado: true
-            })
-        })
-    }
+    componentDidMount() {
+        const user = auth.currentUser.userEmail;
 
-    yaNoEsCopado(idDocumento){
-        db
-        .collection('users')
-        .doc(idDocumento)
-        .update({
-            arrCopados: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-        })
-        .then(() => {
-            this.setState({
-                esCopado:false
-            })
-        })
-    }
-
-  render() {
-    return (
-        <View>
-            <Text>{this.props.item.data.owner}</Text>  
-            <Text>{this.props.item.data.username}</Text>
-            {
-                this.state.esCopado ?
-                <TouchableOpacity
-                onPress={()=> this.yaNoEsCopado(this.props.item.id)}
-                style={
-                    styles.btn2
+        // Verificar si el usuario ya dio like (Firestore debe tener un array de usuarios que dieron like)
+        db.collection('posts')
+            .doc(this.props.postId)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    console.log('Datos del documento:', data);
+    
+                    this.setState({
+                        contador: data.contador || 0, // Si no existe, inicializa como 0
+                        userLiked: data.likes?.includes(user) || false,
+                    });
                 }
-                >
-                    <Text>Ya no me parece Copado</Text>
+            });
+    }
+
+    toggleLike = () => {
+        const user = auth.currentUser.email;
+        const postId = this.props.postId;
+
+        if (this.state.userLiked) {
+            // Si ya dio like, elimina su email de la lista de likes y decrementa el contador
+            db.collection('posts')
+                .doc(postId)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayRemove(user),
+                    contador: firebase.firestore.FieldValue.increment(-1),
+                })
+                .then(() => {
+                    this.setState((prevState) => ({
+                        userLiked: false,
+                        contador: prevState.contador - 1,
+                    }));
+                });
+        } else {
+            // Si no ha dado like, agrega su email y aumenta el contador
+            db.collection('posts')
+                .doc(postId)
+                .update({
+                    likes: firebase.firestore.FieldValue.arrayUnion(user),
+                    contador: firebase.firestore.FieldValue.increment(1),
+                })
+                .then(() => {
+                    this.setState((prevState) => ({
+                        userLiked: true,
+                        contador: prevState.contador + 1,
+                    }));
+                });
+        }
+    };
+
+    render() {
+        return (
+            <View style={styles.likeContainer}>
+                <TouchableOpacity onPress={this.toggleLike}>
+                    <Text style={[styles.likeText, this.state.userLiked && styles.liked]}>
+                        {this.state.userLiked ? 'Quitar Like' : 'Like'}
+                    </Text>
                 </TouchableOpacity>
-                :
-                <TouchableOpacity
-                    onPress={()=> this.actualizarEsCopado(this.props.item.id)}
-                    style={
-                        styles.btn
-                    }
-                >
-                    <Text>Es Copado</Text>
-                </TouchableOpacity>
-            }
-        </View>
-    )
-  }
+                <Text style={styles.contador}>{this.state.contador} </Text>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-    btn: {
-     padding: 10,
-     backgroundColor: 'green'
+    likeContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 10,
     },
-    btn2: {
-        padding: 10,
-        backgroundColor: 'red'
-    } 
- })
+    likeText: {
+        color: '#e57d90',
+        fontSize: 14,
+        marginRight: 10,
+    },
+    liked: {
+        color: '#ff4500', // Color diferente si el usuario ya dio like
+    },
+    contador: {
+        color: '#333',
+        fontSize: 14,
+    },
+});

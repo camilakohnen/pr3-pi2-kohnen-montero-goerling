@@ -8,11 +8,11 @@ export default class Register extends Component {
     }
 
     irAlLogin(){
-        this.props.navigation.navigate('login')
+        this.props.navigation.navigate('Login')
     }
 
     goToAnidada(){
-        this.props.navigation.navigate('anidada')
+        this.props.navigation.navigate('Home')
     }
     
   render() {
