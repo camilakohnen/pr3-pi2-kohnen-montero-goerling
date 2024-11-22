@@ -40,7 +40,7 @@ export default class FormularioRegister extends Component {
                 })
                 .then(() => {
                     console.log('llega a la redireccion')
-                    this.props.navigation.navigate('anidada')} )
+                    this.props.navigation.navigate('Home')} )
             }
         })
         .catch( err => {

@@ -28,7 +28,7 @@ export default class FormularioLogin extends Component {
         //createUserWithEmailAndPassword
         auth.signInWithEmailAndPassword(this.state.email, this.state.password)
         .then((user) => {
-            this.props.navigation.navigate('anidada')
+            this.props.navigation.navigate('Home')
             console.log('ingreso correctamente') 
             console.log(user);
 
