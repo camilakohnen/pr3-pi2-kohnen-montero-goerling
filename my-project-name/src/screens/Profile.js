@@ -50,7 +50,7 @@ export default class Profile extends Component {
   logout = () => {
     auth.signOut()
         .then(() => {
-            this.props.navigation.navigate('login'); // Redirigir a la pantalla de login
+            this.props.navigation.navigate('Login'); // Redirigir a la pantalla de login
         })
         .catch((error) => {
             console.error(error);
@@ -120,14 +120,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    backgroundColor: '#ffe4e1',
+    backgroundColor: '#fff',
   },
   title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 10,
-    color: '#d63384',
     textAlign: 'center',
+    fontSize: 20, 
+    fontWeight: 'bold',
+    color: '#333', 
+    marginBottom: 15,
   },
   info: {
     fontSize: 16,
@@ -142,15 +142,14 @@ const styles = StyleSheet.create({
     color: '#d63384',
   },
   postContainer: {
-    padding: 10,
-    marginBottom: 10,
     backgroundColor: '#fff',
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 4,
-    elevation: 3,
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+    shadowColor: 'pink',
+    shadowOpacity: 5,
+    shadowRadius: 5,
+    elevation: 2,
   },
   postText: {
     fontSize: 16,

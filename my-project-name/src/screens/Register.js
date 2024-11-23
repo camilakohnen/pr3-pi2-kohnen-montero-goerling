@@ -10,10 +10,6 @@ export default class Register extends Component {
     irAlLogin(){
         this.props.navigation.navigate('Login')
     }
-
-    goToAnidada(){
-        this.props.navigation.navigate('Home')
-    }
     
   render() {
     return (
@@ -27,11 +23,6 @@ export default class Register extends Component {
             <Text>Ya tengo cuenta</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-            onPress={()=> this.goToAnidada()}
-        >
-            <Text>Ir a home</Text>
-        </TouchableOpacity>
       </View>
     )
   }
