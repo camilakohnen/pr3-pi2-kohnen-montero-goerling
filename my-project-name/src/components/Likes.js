@@ -16,7 +16,7 @@ export default class Likes extends Component {
     componentDidMount() {
         const user = auth.currentUser.userEmail;
 
-        // Verificar si el usuario ya dio like (Firestore debe tener un array de usuarios que dieron like)
+        // Verificar si el usuario ya dio like 
         db.collection('posts')
             .doc(this.props.postId)
             .get()
@@ -38,7 +38,7 @@ export default class Likes extends Component {
         const postId = this.props.postId;
 
         if (this.state.userLiked) {
-            // Si ya dio like, elimina su email de la lista de likes y decrementa el contador
+            // Si ya dio like, elimino su mail de la lista de likes y resto el contador
             db.collection('posts')
                 .doc(postId)
                 .update({
@@ -52,7 +52,7 @@ export default class Likes extends Component {
                     }));
                 });
         } else {
-            // Si no ha dado like, agrega su email y aumenta el contador
+            // Si no dio like, agrego su mail y aumento el contador
             db.collection('posts')
                 .doc(postId)
                 .update({
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         marginRight: 10,
     },
     liked: {
-        color: '#ff4500', // Color diferente si el usuario ya dio like
+        color: '#ff4500', // Color diferente si ya dio like
     },
     contador: {
         color: '#333',

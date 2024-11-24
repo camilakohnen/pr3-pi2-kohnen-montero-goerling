@@ -54,7 +54,9 @@ export default class BuscadorUsers extends Component {
           onChangeText={(text) => this.filtrado(text)}
         />
         <FlatList
-            data={this.state.filteredUsers}
+            data={this.state.filteredUsers.length > 0 
+                ? this.state.filteredUsers 
+                : [{ id: 'no hay usuario', data: { username: "El usuario no existe" } }]}
             keyExtractor={(item) => item.id.toString()}
             renderItem={ ({item}) =>  <Text style={styles.userCard}> {item.data.username} </Text>} // viene destrucutrado 
         />
