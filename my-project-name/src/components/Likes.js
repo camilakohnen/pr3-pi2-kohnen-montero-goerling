@@ -33,7 +33,7 @@ export default class Likes extends Component {
             });
     }
 
-    toggleLike = () => {
+    likear = () => {
         const user = auth.currentUser.email;
         const postId = this.props.postId;
 
@@ -71,7 +71,7 @@ export default class Likes extends Component {
     render() {
         return (
             <View style={styles.likeContainer}>
-                <TouchableOpacity onPress={this.toggleLike}>
+                <TouchableOpacity onPress={this.likear}>
                     <Text style={[styles.likeText, this.state.userLiked && styles.liked]}>
                         {this.state.userLiked ? 'Quitar Like' : 'Like'}
                     </Text>
