@@ -4,9 +4,11 @@ import Login from '../screens/Login'
 import Register from '../screens/Register'
 import NavegacionAnidada from './NavegacionAnidada'
 
+
 const Stack = createNativeStackNavigator()
 
 export default class NavegacionPrincipal extends Component {
+
   render() {
     return (
         <Stack.Navigator>

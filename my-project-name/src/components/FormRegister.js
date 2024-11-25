@@ -13,6 +13,14 @@ export default class FormularioRegister extends Component {
         }
     }
 
+    componentDidMount(){
+        auth.onAuthStateChanged( (user) => {
+            if(user){
+                this.props.navigation.navigate('Home')
+            }  
+        })
+    }
+
     registrarse(username, email, password){
         if(username.length < 2){
             this.setState( {error: "Ingrese un username"})

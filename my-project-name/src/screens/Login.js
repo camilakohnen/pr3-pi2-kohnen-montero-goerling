@@ -8,10 +8,6 @@ export default class Login extends Component {
         super(props)
     }
 
-    componentDidMount(){
-        console.log('props de la screen', this.props)
-    }
-
     irARegister(){
         this.props.navigation.navigate('Register')
     }

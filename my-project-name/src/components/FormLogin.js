@@ -13,6 +13,15 @@ export default class FormularioLogin extends Component {
         }
     }
 
+
+    componentDidMount(){
+        auth.onAuthStateChanged( (user) => {
+            if(user){
+                this.props.navigation.navigate('Home')
+            }  
+        })
+    }
+
     login(email, password){
         if(!email.includes('@')){
             this.setState( {error: "Ingrese un formato de mail correcto"})
@@ -31,8 +40,6 @@ export default class FormularioLogin extends Component {
             this.props.navigation.navigate('Home')
             console.log('ingreso correctamente') 
             console.log(user);
-
-            // FALTA IF PARA VER SI EL USUARIO ESTA NE SESION 
 
         })
         .catch((err) => {
