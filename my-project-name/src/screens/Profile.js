@@ -9,7 +9,7 @@ export default class Profile extends Component {
     this.state = {
       userInfo: [], 
       posts: [], 
-      loading: true, // Indicador de carga
+      loading: true, 
     };
   }
 
@@ -33,9 +33,8 @@ export default class Profile extends Component {
           this.setState({ userInfo: arrDocs });
         });
 
-      // Cargar los posteos del usuario
       db.collection('posts')
-        .where('userEmail', '==', usuarioActual.email) // Filtrar los posteos por el email del usuario
+        .where('userEmail', '==', usuarioActual.email) 
         .onSnapshot((snapshot) => {
           const posteos = snapshot.docs.map((doc) => ({
               id: doc.id,
@@ -50,7 +49,7 @@ export default class Profile extends Component {
   logout = () => {
     auth.signOut()
         .then(() => {
-            this.props.navigation.navigate('Login'); // Redirigir a la pantalla de login
+            this.props.navigation.navigate('Login'); 
         })
         .catch((error) => {
             console.error(error);
@@ -96,7 +95,6 @@ deletePost = (postId) => {
                 <Text style={styles.postText}>{item.userEmail}</Text>
                 <Text style={styles.postText}>{item.texto}</Text>
 
-                {/* Botón para eliminar el post */}
                 <TouchableOpacity 
                   style={styles.deleteButton} 
                   onPress={() => this.deletePost(item.id)}>
@@ -107,7 +105,6 @@ deletePost = (postId) => {
           />
         )}
 
-        {/* Botón de Logout */}
         <TouchableOpacity style={styles.logoutButton} onPress={this.logout}>
           <Text style={styles.logoutButtonText}>Cerrar sesión</Text>
         </TouchableOpacity>
